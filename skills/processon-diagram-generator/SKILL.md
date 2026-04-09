@@ -59,11 +59,8 @@ dependencies:
 
 1. 先在聊天里说明正在使用 `processon-diagram-generator` 技能处理当前请求。
 2. 识别图形类型，提取关键实体、动作、判断条件，构建优化后的 Prompt。
-3. 优先使用名为 `processon-diagrams` 的 MCP 服务生成图形。
-4. 如果 MCP 不可用、不可达或未安装，先简短告知用户，再回退到本地脚本 `scripts/processon_api_client.py`。
-5. 脚本回退模式依赖 `PROCESSON_API_KEY`。如果缺失，明确告诉用户如何配置，并附上获取地址 `https://smart.processon.com/user`。
-6. MCP 模式下的地址、密钥和鉴权由宿主或用户自行配置。本技能不在聊天里收集密钥，也不替用户改环境变量。
-7. 如果 MCP 和脚本都失败，先说明失败原因和下一步配置方式，不要自动再输出 Mermaid 作为兜底图。
+3. 生成依赖 `PROCESSON_API_KEY`。如果缺失，明确告诉用户如何配置，并附上获取地址 `https://smart.processon.com/user`。
+4. 如果失败，先说明失败原因和下一步配置方式，不要自动再输出 Mermaid 作为兜底图。
 
 ## 结果呈现
 
@@ -88,22 +85,6 @@ dependencies:
 - 最终回复前，先自检一次：是否已经完全匹配模板；如果没有，先重排正文再发送。
 
 ## 配置提示
-
-### MCP 模式
-
-```json
-{
-  "mcpServers": {
-    "processon-diagrams": {
-      "type": "http",
-      "url": "https://smart.processon.com/mcp",
-      "headers": {
-        "Authorization": "Bearer <your-processon-api-key>"
-      }
-    }
-  }
-}
-```
 
 ### API 回退模式
 

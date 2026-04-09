@@ -33,7 +33,7 @@ npx skills add https://github.com/processonai/processon-skills.git --skill proce
 
 ### 推荐方式：配置环境变量
 
-先配置 `PROCESSON_API_KEY`，这样在 MCP 不可用时也可以直接使用脚本回退模式：
+先配置 `PROCESSON_API_KEY`：
 
 ```bash
 export PROCESSON_API_KEY="<your-processon-api-key>"
