@@ -13,8 +13,14 @@ npx skills add https://github.com/processonai/processon-skills.git --skill proce
 ## 支持的图形类型
 
 - 流程图
+- 业务流程图
+- 泳道图
+- 流程地图
+- 标准流程图
 - 时序图
-- 架构图
+- 软件架构图
+- 系统架构图
+- 云架构图
 - 网络拓扑图
 - ER 图
 - 组织结构图
