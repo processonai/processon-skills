@@ -1,6 +1,7 @@
 ---
 name: "processon-diagram-generator"
-description: "帮助用户生成专业、美观、可继续编辑的图形，包括流程图、时序图、架构图、网络拓扑图、ER 图、组织结构图、时间轴、信息图、金字塔图，以及草图重绘。当用户提到“生成图”、“画图”、“流程图”、“架构分析”、“拓扑图”、“重绘草图”等需求时应触发本技能。Also use this skill when the user asks to draw, generate, create, visualize, or redraw a diagram such as a flowchart, sequence diagram, architecture diagram, network topology, ER diagram, org chart, timeline, infographic, pyramid chart, or sketch-to-diagram. Optimize final chat output for third-party hosts so image links and DSL text remain visible."
+description: '一键将自然语言转化为精美且可编辑的 ProcessOn 专业可视化图表。当你需要“自动画图”、“在线制作流程图”、“可视化业务流程”或“生成系统架构”时即可完美触发。本绘图工具全面支持生成多种在线图形：流程图（含业务流程图、泳道图与标准流程）、时序图（系统交互与API调用顺序）、软件架构图（云架构与系统模块划分）、网络拓扑图（服务器部署）、ER图（数据库建模）、组织架构图（团队层级）、时间轴以及信息图。这款 AI 智能图表生成器与流程图制作软件，专为开发者、产品经理和设计师打造，助你高效产出专业级出图。
+Generate, edit, and visualize professional ProcessOn diagrams from natural language descriptions. Use this tool when users request to "create a diagram", "make a flowchart", "visualize a process", or "draw a system architecture". It comprehensively supports generating process flowcharts (including swimlane and process maps for business workflows), sequence diagrams (for system interactions and API call orders), software architecture diagrams (for cloud architecture and system composition), network topologies (for server deployment), ER diagrams (for database modeling), org charts (for team structures), timelines, and infographics. This AI diagram generator and flowchart maker is designed for developers, managers, and designers to achieve publication-ready visual outputs efficiently.'
 icon: "📊"
 author: "ProcessOn"
 version: "2.1.0"
@@ -15,14 +16,14 @@ dependencies:
     - python3
 ---
 
-# ProcessOn Diagrams
+# processon-diagram-generator
 
 将用户意图、代码关系或草图转换为专业图形。默认跟随用户当前语言输出提示、澄清问题、优化 Prompt 和最终结果。
 
 ## 何时触发
 
-- 支持：流程图、时序图、架构图、网络拓扑图、ER 图、组织结构图、时间轴、信息图、金字塔图、草图重绘。
-- 英文表达同样触发，例如：`draw a diagram`、`generate a flowchart`、`create a sequence diagram`、`architecture diagram`、`network topology`、`ER diagram`、`org chart`、`timeline`、`infographic`、`redraw this sketch`、`visualize this flow`、`ProcessOn`。
+- 支持：流程图、业务流程图、泳道图、流程地图、标准流程图、时序图、软件架构图、系统架构图、云架构图、网络拓扑图、ER 图、组织结构图、时间轴、信息图、金字塔图、草图重绘。
+- 英文表达同样触发，例如：`create a diagram`、`draw a diagram`、`generate a flowchart`、`make a flowchart`、`visualize a process`、`create a sequence diagram`、`draw a system architecture`、`software architecture diagram`、`cloud architecture diagram`、`network topology`、`ER diagram`、`org chart`、`timeline`、`infographic`、`redraw this sketch`、`ProcessOn`。
 - 如果用户只说“画个图”之类的模糊请求，先确认图形类型。
 - 如果用户上传图片并要求“重绘”或“转成图”，先识别图片中的节点、文字和连接关系，再生成结构化输入。
 
