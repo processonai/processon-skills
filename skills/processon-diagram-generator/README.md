@@ -2,13 +2,37 @@
 
 用 ProcessOn 生成专业、可继续编辑的图形，支持自然语言、代码上下文。
 
-## 安装
+## 安装与首要配置
 
+### 1. 安装技能
 ```bash
 npx skills add https://github.com/processonai/processon-skills.git --skill processon-diagram-generator
 ```
 
-如果宿主不会自动刷新 skill，安装后请重启对应工具。
+### 2. 获取 API Key (核心步骤)
+本技能依赖 ProcessOn 智能绘图接口。请务必访问以下地址获取你的 `PROCESSON_API_KEY`：
+
+**👉 [获取 API Key/Token](https://smart.processon.com/user)**
+
+### 3. 设置环境变量
+将获取到的 Key 设置为系统环境变量：
+
+> **重要提示**：请务必在**当前运行 Agent 的终端**中设置环境变量。如果你使用的是 IDE 内置终端，设置后可能需要重启 IDE 或重启 Agent 宿主进程以使配置生效。
+
+**macOS / Linux:**
+```bash
+export PROCESSON_API_KEY="你的-API-Key"
+```
+
+**Windows (PowerShell):**
+```powershell
+$env:PROCESSON_API_KEY="你的-API-Key"
+```
+
+**Windows (CMD):**
+```cmd
+set PROCESSON_API_KEY=你的-API-Key
+```
 
 ## 支持的图形类型
 
@@ -21,29 +45,11 @@ npx skills add https://github.com/processonai/processon-skills.git --skill proce
 - 软件架构图
 - 系统架构图
 - 云架构图
-- 网络拓扑图
 - ER 图
 - 组织结构图
 - 时间轴
 - 信息图
 - 金字塔图
-
-
-## 配置
-
-### 推荐方式：配置环境变量
-
-先配置 `PROCESSON_API_KEY`：
-
-```bash
-export PROCESSON_API_KEY="<your-processon-api-key>"
-```
-
-获取地址：
-
-```text
-https://smart.processon.com/user
-```
 
 
 ## 提示词示例
@@ -72,7 +78,7 @@ https://smart.processon.com/user
 dsl编辑链接：
 
 ```text
-https://smart.processon.com/render-dsl
+https://smart.processon.com/editor
 ```
 
 ## 本地开发
@@ -80,5 +86,5 @@ https://smart.processon.com/render-dsl
 如果你想在本地迭代这个 skill，而不是从 GitHub 安装，可以把 skill 目录放到本地 skills 目录，例如：
 
 ```text
-~/.codex/skills/processon-diagram-generator
+~/.agents/skills/processon-diagram-generator
 ```
