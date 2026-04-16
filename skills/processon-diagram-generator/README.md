@@ -8,6 +8,10 @@
 ```bash
 npx skills add https://github.com/processonai/processon-skills.git --skill processon-diagram-generator
 ```
+#### 更新技能
+```bash
+npx skills add https://github.com/processonai/processon-skills.git --skill processon-diagram-generator --force -g -y
+```
 
 ### 2. 获取 API Key (核心步骤)
 本技能依赖 ProcessOn 智能绘图接口。请务必访问以下地址获取你的 `PROCESSON_API_KEY`：
