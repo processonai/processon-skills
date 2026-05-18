@@ -8,11 +8,62 @@ import urllib.error
 import urllib.request
 from datetime import datetime
 
-DSL_STREAM_API_URL = "https://smart.processon.com/v1/chat/completion"
+DSL_STREAM_API_URL = "https://smart.processon.com/v2/chat/completion"
 DSL_STREAM_MODEL = "deepseek-v3-2-251201"
 DSL_STREAM_UID = "567890"
 DSL_EDIT_URL = "https://smart.processon.com/editor"
 IMAGE_RENDER_API_URL = "https://smart.processon.com/v1/api/generate/img"
+
+
+def load_api_key():
+    """从多个来源按优先级加载 PROCESSON_API_KEY，一次配置永久生效。
+
+    优先级顺序：
+    1. 环境变量 PROCESSON_API_KEY（最高，手动 export 覆盖所有）
+    2. ~/.processon.env（全局用户级，跨 session、跨平台持久化）
+    3. skill 安装目录下的 .env（skill 级）
+    4. ~/.workbuddy/.processon.env（WorkBuddy 专用）
+
+    适用平台：WorkBuddy、OpenClaw、QClaw、Claude Code、Cursor 等所有可运行 Python 脚本的环境。
+    """
+    # 1. 环境变量（最高优先级）
+    key = os.environ.get("PROCESSON_API_KEY", "").strip()
+    if key:
+        return key
+
+    # 构建候选文件列表
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    skill_dir = os.path.dirname(script_dir)
+
+    env_files = [
+        os.path.expanduser("~/.processon.env"),
+        os.path.join(skill_dir, ".env"),
+        os.path.expanduser("~/.workbuddy/.processon.env"),
+    ]
+
+    for env_file in env_files:
+        if not os.path.isfile(env_file):
+            continue
+        try:
+            with open(env_file, "r", encoding="utf-8") as f:
+                for raw_line in f:
+                    line = raw_line.strip()
+                    # 跳过注释和空行
+                    if line.startswith("#") or not line:
+                        continue
+                    # 匹配: export PROCESSON_API_KEY="value" 或 PROCESSON_API_KEY=value
+                    m = re.match(
+                        r'^(?:export\s+)?PROCESSON_API_KEY\s*=\s*["\']?([^"\']+)["\']?\s*$',
+                        line,
+                    )
+                    if m:
+                        key = m.group(1).strip()
+                        if key:
+                            return key
+        except Exception:
+            pass
+
+    return ""
 
 
 def normalize_title(title):
@@ -703,7 +754,7 @@ def generate_diagram(prompt, title=None, stream_style=None, output_mode=None, au
 
         return current_event_name, step_number, diagram_type, dsl_started
 
-    api_key = os.environ.get("PROCESSON_API_KEY", "")
+    api_key = load_api_key()
 
     try:
         if not api_key.strip():
@@ -762,7 +813,7 @@ def generate_diagram(prompt, title=None, stream_style=None, output_mode=None, au
             msg = f"HTTP {exc.code} {exc.reason}: {body}"
         except Exception:
             msg = f"HTTP {exc.code} {exc.reason}"
-        current_api_key = os.environ.get("PROCESSON_API_KEY", "").strip()
+        current_api_key = api_key
         if exc.code in (401, 403) and not current_api_key:
             missing_payload = build_missing_api_key_payload()
             missing_payload["content"][0]["text"] = f"{msg}\n\n{missing_payload['content'][0]['text']}"
