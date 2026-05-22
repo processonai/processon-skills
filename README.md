@@ -9,6 +9,8 @@
 | Skill | 文档 |
 | --- | --- |
 | `processon-diagram-generator` | [skills/processon-diagram-generator/README.md](./skills/processon-diagram-generator/README.md) |
+| `processon-mindmap-generator` | [skills/processon-mindmap-generator/README.md](./skills/processon-mindmap-generator/README.md) |
+| `document-to-mindmap` | [skills/document-to-mindmap/README.md](./skills/document-to-mindmap/README.md) |
 
 ## 快速开始
 
