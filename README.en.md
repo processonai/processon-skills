@@ -22,10 +22,9 @@ npx skills add https://github.com/processonai/processon-skills.git --skill proce
 
 2. Restart your host if it does not refresh installed skills automatically.
 
-3. Configure either:
-
-- the `processon-diagrams` MCP server
-- or `PROCESSON_API_KEY` for script fallback
+3. Complete browser authorization when the skill first runs. The diagram skill
+   stores the returned token in the `processon-diagram-generator` mcporter
+   configuration and connects through Streamable HTTP.
 
 4. Open the corresponding skill README for detailed capabilities, configuration, and prompt examples.
 
@@ -37,28 +36,14 @@ Install `processon-diagram-generator`:
 npx skills add https://github.com/processonai/processon-skills.git --skill processon-diagram-generator
 ```
 
-## Repository Layout
-
-```text
-processon-skills/
-  README.md
-  README.en.md
-  LICENSE
-  .gitignore
-  skills/
-    processon-diagram-generator/
-      SKILL.md
-      README.md
-      scripts/
-        processon_api_client.py
-```
-
 ## Notes
 
 - Skill discovery depends on each skill directory containing a valid `SKILL.md`.
 - Keep public interface names stable:
   - skill name: `processon-diagram-generator`
-  - MCP server name: `processon-diagrams`
-  - env var: `PROCESSON_API_KEY`
+  - MCP server name: `processon-diagram-generator`
+
+The diagram skill only supports browser authorization plus MCP. API-key script
+fallback is no longer part of the runtime flow.
 
 For usage details, configuration examples, and host-compatibility guidance, see [skills/processon-diagram-generator/README.md](./skills/processon-diagram-generator/README.md).
