@@ -50,12 +50,6 @@ dependencies:
 node ./setup.mjs processon_check_and_start_auth
 ```
 
-Windows 原生 cmd / PowerShell 也可以执行：
-
-```bat
-.\setup.cmd processon_check_and_start_auth
-```
-
 | 输出 | 处理方式 |
 |------|---------|
 | `READY` | ✅ 直接执行用户任务，**无需后续步骤** |
