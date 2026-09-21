@@ -19,6 +19,9 @@
 
 ```bash
 npx skills add https://github.com/processonai/processon-skills.git --skill processon-diagram-generator
+npx skills add https://github.com/processonai/processon-skills.git --skill processon-mindmap-generator
+npx skills add https://github.com/processonai/processon-skills.git --skill document-to-mindmap
+npx skills add https://github.com/processonai/processon-skills.git --skill processon-ai-skill
 ```
 
 2. 如果你的宿主不会自动刷新 skill，安装后重启对应工具。
