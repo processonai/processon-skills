@@ -488,12 +488,11 @@ function generateCode() {
   const randomId = crypto.randomBytes(8).toString("hex");
   const timestamp = Math.floor(Date.now() / 1000);
   const payload = `po_mcp_${randomId}_${timestamp}`;
-  const md5Hex = crypto.createHash("md5").update(config.authPsk).digest("hex");
-  const ivHex = md5Hex.split("").reverse().join("");
+  const keyMaterial = crypto.createHash("sha256").update(config.authPsk).digest();
   const cipher = crypto.createCipheriv(
     "aes-128-cbc",
-    Buffer.from(md5Hex, "hex"),
-    Buffer.from(ivHex, "hex"),
+    keyMaterial.subarray(0, 16),
+    keyMaterial.subarray(16, 32),
   );
   const encrypted = Buffer.concat([cipher.update(payload, "utf8"), cipher.final()]).toString("base64");
 
