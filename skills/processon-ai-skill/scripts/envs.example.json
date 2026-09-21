@@ -1,0 +1,11 @@
+{
+  "default": "prod",
+  "environments": {
+    "prod": {
+      "base": "https://www.processon.com"
+    },
+    "gray": {
+      "base": "https://v5hd.processon.com"
+    }
+  }
+}
